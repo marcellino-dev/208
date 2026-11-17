@@ -1,0 +1,84 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --card: #080808;
+  --card-foreground: #ffffff;
+  --popover: #080808;
+  --popover-foreground: #ffffff;
+  --primary: #ff1680;
+  --primary-foreground: #000000;
+  --secondary: #ffffff;
+  --secondary-foreground: #000000;
+  --muted: #111111;
+  --muted-foreground: #ffffff;
+  --accent: #ff1680;
+  --accent-foreground: #000000;
+  --destructive: #ff1680;
+  --destructive-foreground: #000000;
+  --border: #ff1680;
+  --input: #ff1680;
+  --ring: #ff1680;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: Arial, Helvetica, sans-serif;
+  --font-mono: "Courier New", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground;
+    background-color: #000000;
+  }
+  ::selection { background: #ff1680; color: #000000; }
+}
+
+.eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: #ff1680; }
+
+@media (min-width: 1024px) and (min-height: 820px) {
+  .depth-stage {
+    display: grid;
+    min-height: 100vh;
+    align-items: center;
+  }
+
+  .depth-panel {
+    grid-area: 1 / 1;
+  }
+
+  .depth-panel:not(:first-child) {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
