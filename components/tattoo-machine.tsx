@@ -6,6 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useLenis } from "lenis/react"
 import type { ModelViewerElement } from "@google/model-viewer"
 
+const MOBILE_PEN_OFFSET_Y = -12
+
 export function TattooMachine() {
   const layerRef = useRef<HTMLDivElement>(null)
   const machineRef = useRef<HTMLDivElement>(null)
@@ -33,9 +35,10 @@ export function TattooMachine() {
     const layer = layerRef.current
     const hero = document.querySelector<HTMLElement>("#inicio")
     const caption = document.querySelector<HTMLElement>("#gallery-caption")
+    const galleryHeading = caption?.closest("section")?.querySelector<HTMLElement>("h2")
 
-    if (!machine || !layer || !hero || !caption) {
-      console.error("Tattoo machine animation requires the hero and gallery caption.")
+    if (!machine || !layer || !hero || !caption || !galleryHeading) {
+      console.error("Tattoo machine animation requires the hero and gallery heading.")
       return
     }
 
@@ -53,6 +56,23 @@ export function TattooMachine() {
         window.innerHeight * (window.innerWidth < 768 ? mobile : desktop)
       const scale = (desktop: number, mobile: number) => () =>
         window.innerWidth < 768 ? mobile : desktop
+      const mobileEndY = () =>
+        galleryHeading.getBoundingClientRect().top -
+        caption.getBoundingClientRect().top +
+        window.innerHeight * 0.28 -
+        96
+
+      const startY = () => {
+        if (window.innerWidth >= 768) {
+          return window.innerHeight * -0.08
+        }
+        const slot = document.getElementById("pen-slot")
+        if (!slot) {
+          return window.innerHeight * -0.04
+        }
+        const rect = slot.getBoundingClientRect()
+        return rect.top + rect.height / 2 - window.innerHeight / 2 + MOBILE_PEN_OFFSET_Y
+      }
 
       const path = gsap.timeline({
         scrollTrigger: {
@@ -81,11 +101,11 @@ export function TattooMachine() {
       path.fromTo(
         machine,
         {
-          x: position(0.23, 0.18),
-          y: verticalPosition(-0.08, 0.13),
+          x: position(0.23, 0.02),
+          y: startY,
           z: -40,
           rotation: 45,
-          scale: scale(1, 0.75),
+          scale: scale(1, 0.88),
         },
         {
           x: position(0.02, -0.06),
@@ -100,7 +120,7 @@ export function TattooMachine() {
 
       path.to(machine, {
         x: position(0.17, 0.02),
-        y: verticalPosition(0.1, 0.25),
+        y: () => (window.innerWidth < 768 ? mobileEndY() : window.innerHeight * 0.1),
         z: 25,
         rotation: 120,
         scale: scale(1.15, 0.75),
@@ -220,7 +240,7 @@ export function TattooMachine() {
   return (
     <div
       ref={layerRef}
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[100dvh]"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[100dvh] overflow-x-clip"
       style={{ perspective: "1200px" }}
     >
       <div

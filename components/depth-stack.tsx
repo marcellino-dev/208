@@ -124,13 +124,23 @@ export function DepthStack({ children }: DepthStackProps) {
     })
 
     mm.add(COMPACT, () => {
-      panels.forEach((panel) => {
+      panels.forEach((panel, index) => {
+        const side = index % 2 === 0 ? -1 : 1
+
         gsap.fromTo(
           panel,
-          { scale: 0.9, autoAlpha: 0.2, transformOrigin: "50% 0%" },
           {
+            x: () => side * window.innerWidth * 0.2,
+            scale: 1,
+            autoAlpha: 0,
+            filter: "blur(4px)",
+            transformOrigin: "50% 50%",
+          },
+          {
+            x: 0,
             scale: 1,
             autoAlpha: 1,
+            filter: "blur(0px)",
             ease: "none",
             scrollTrigger: {
               trigger: panel,

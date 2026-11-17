@@ -74,7 +74,7 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
         scrollTrigger: {
           trigger: stage,
           start: "bottom bottom",
-          end: () => `+=${window.innerHeight * (window.innerWidth < 768 ? 0.9 : 1.3)}`,
+          end: () => `+=${window.innerHeight * 1.3}`,
           pin: true,
           scrub: true,
           anticipatePin: 1,
@@ -109,11 +109,24 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
 
       tl.to(items, { opacity: 0, duration: 0.3, ease: "none", stagger: { each: 0.03 } }, 0.35)
 
-      // 2) A próxima seção nasce de dentro, por trás das imagens
+      // 2) No desktop a próxima seção surge por trás; no mobile, entra pela lateral.
       tl.fromTo(
         underlay,
-        { autoAlpha: 0, scale: 0.8, yPercent: 4, transformOrigin: "50% 50%" },
-        { autoAlpha: 1, scale: 1, yPercent: 0, duration: 0.5, ease: "power2.out" },
+        {
+          autoAlpha: 0,
+          scale: () => (window.innerWidth < 768 ? 1 : 0.8),
+          xPercent: () => (window.innerWidth < 768 ? 18 : 0),
+          yPercent: () => (window.innerWidth < 768 ? 0 : 4),
+          transformOrigin: "50% 50%",
+        },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          xPercent: 0,
+          yPercent: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        },
         0.12,
       )
 
