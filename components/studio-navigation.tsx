@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 
 const links = [
@@ -14,9 +14,17 @@ const links = [
 
 export function StudioNavigation() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-transparent text-white">
+    <header className={`fixed inset-x-0 top-0 z-50 text-white transition-colors duration-300 lg:bg-transparent lg:backdrop-blur-none ${scrolled || open ? "bg-black/85 backdrop-blur-md" : "bg-transparent"}`}>
       <nav aria-label="Navegação principal" className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
         <Link href="#inicio" aria-label="208 Estúdio — início" className="flex items-center gap-2 font-black tracking-tighter">
           <span className="grid size-10 place-items-center rounded-full bg-white text-lg text-black">208</span>

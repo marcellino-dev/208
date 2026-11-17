@@ -23,7 +23,7 @@ export function StudioHero() {
       <div className="relative z-0 mx-auto grid w-full max-w-7xl items-center gap-4 px-5 pb-20 pt-12 md:grid-cols-[1.1fr_.9fr] md:px-8 md:pb-24">
         <div className="relative z-30 max-w-2xl">
           <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.28em] text-[#ff8abf]"><span className="h-px w-8 bg-[#ff1680]" /> Tatuagem · Joinville/SC</p>
-          <h1 className="text-[clamp(3.25rem,16.5vw,4rem)] font-black leading-[.78] tracking-[-.09em] md:text-[clamp(4rem,7.2vw,7rem)]">SUA PELE.<br /><span className="text-[#ff1680]">SUA</span><br />HISTÓRIA.</h1>
+          <h1 className="text-[clamp(3.25rem,16.5vw,4rem)] font-black leading-[.9] tracking-[-.06em] md:text-[clamp(4rem,7.2vw,7rem)] md:leading-[.78] md:tracking-[-.09em]">SUA PELE.<br /><span className="text-[#ff1680]">SUA</span><br />HISTÓRIA.</h1>
           <p className="mt-8 max-w-md text-base leading-relaxed text-white/70 md:text-lg">Tatuamos em Joinville desde 2020 e já atendemos mais de 10 mil clientes. Somos um estúdio inclusivo, voltado ao público LGBTQIA+ e às mulheres, com artistas de vários estilos e níveis de experiência.</p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <a href="https://wa.me/5547991035449" target="_blank" rel="noreferrer" className="rounded-full bg-[#ff1680] px-7 py-4 text-sm font-extrabold text-black transition hover:-translate-y-0.5 hover:bg-white">Agendar pelo WhatsApp →</a>

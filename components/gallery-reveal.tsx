@@ -47,6 +47,7 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
     }
 
     gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.config({ ignoreMobileResize: true })
 
     const items = gsap.utils.toArray<HTMLElement>("[data-reveal-item]", galleryLayer)
 
@@ -120,10 +121,12 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
       tl.set({}, {}, 1)
     }, stage)
 
-    // O link "Minis" do menu cai no fim da animação, não no meio dela
-    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[href="#minis"]'))
-    const goToMinis = (event: Event) => {
-      if (!trigger) {
+    // Qualquer link "#minis" cai no fim da animação, não no meio dela.
+    // Usa delegação para pegar também o link do menu mobile, que só existe no DOM quando o menu está aberto.
+    const goToMinis = (event: MouseEvent) => {
+      const link = (event.target as Element | null)?.closest('a[href="#minis"]')
+
+      if (!link || !trigger) {
         return
       }
 
@@ -136,11 +139,17 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
       }
     }
 
-    links.forEach((link) => link.addEventListener("click", goToMinis))
+    document.addEventListener("click", goToMinis)
 
     let resizeTimeout: number | undefined
+    let lastWidth = window.innerWidth
     const refresh = () => ScrollTrigger.refresh()
     const refreshAfterResize = () => {
+      // No celular, a barra do navegador aparecendo/sumindo só muda a altura: não recalcula
+      if (window.innerWidth === lastWidth) {
+        return
+      }
+      lastWidth = window.innerWidth
       if (resizeTimeout !== undefined) {
         window.clearTimeout(resizeTimeout)
       }
@@ -151,7 +160,7 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
     window.addEventListener("resize", refreshAfterResize)
 
     return () => {
-      links.forEach((link) => link.removeEventListener("click", goToMinis))
+      document.removeEventListener("click", goToMinis)
       window.removeEventListener("load", refresh)
       window.removeEventListener("resize", refreshAfterResize)
       if (resizeTimeout !== undefined) {
@@ -166,7 +175,7 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
       {/* Atrás das fotos: Pacote de minis */}
       <div
         ref={nextRef}
-        className="absolute inset-x-0 bottom-0 z-0 flex min-h-screen w-full items-center opacity-0 will-change-transform"
+        className="absolute inset-x-0 bottom-0 z-0 flex min-h-[100svh] w-full items-center opacity-0 will-change-transform"
       >
         <div className="w-full">{next}</div>
       </div>

@@ -35,6 +35,7 @@ export function DepthStack({ children }: DepthStackProps) {
     }
 
     gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.config({ ignoreMobileResize: true })
 
     const panels = gsap.utils.toArray<HTMLElement>(".depth-panel", stage)
     const total = DWELL + (panels.length - 1) * (DWELL + MOVE)
@@ -143,8 +144,14 @@ export function DepthStack({ children }: DepthStackProps) {
     })
 
     let resizeTimeout: number | undefined
+    let lastWidth = window.innerWidth
     const refresh = () => ScrollTrigger.refresh()
     const refreshAfterResize = () => {
+      // No celular, a barra do navegador aparecendo/sumindo só muda a altura: não recalcula
+      if (window.innerWidth === lastWidth) {
+        return
+      }
+      lastWidth = window.innerWidth
       if (resizeTimeout !== undefined) {
         window.clearTimeout(resizeTimeout)
       }

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
 
 const artists: {
@@ -42,6 +42,7 @@ const artists: {
 
 export function StudioTeam() {
   const [activeIndex, setActiveIndex] = useState(2)
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
   const visibleArtists = Array.from({ length: artists.length }, (_, position) => {
     const index = (activeIndex + position - 2 + artists.length) % artists.length
     return { artist: artists[index], index, position }
@@ -103,7 +104,24 @@ export function StudioTeam() {
           </div>
         </header>
 
-        <div className="relative mt-12 md:mt-14">
+        <div
+          className="relative mt-12 touch-pan-y md:mt-14"
+          onTouchStart={(event) => {
+            const touch = event.touches[0]
+            touchStart.current = { x: touch.clientX, y: touch.clientY }
+          }}
+          onTouchEnd={(event) => {
+            const start = touchStart.current
+            touchStart.current = null
+            if (!start) return
+            const touch = event.changedTouches[0]
+            const dx = touch.clientX - start.x
+            const dy = touch.clientY - start.y
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+              move(dx < 0 ? 1 : -1)
+            }
+          }}
+        >
           <div className="pointer-events-none absolute inset-x-0 top-1/2 z-20 flex -translate-y-1/2 justify-between sm:-left-5 sm:-right-5 xl:-left-16 xl:-right-16">
             <button
               type="button"

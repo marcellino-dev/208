@@ -98,20 +98,20 @@ export function StudioAbout() {
 
 export function MiniPackage() {
   return (
-    <section id="minis" className="bg-black px-5 py-16 text-white md:px-8 md:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+    <section id="minis" className="bg-black px-5 py-10 text-white md:px-8 md:py-24">
+      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-10">
         <div>
           <p className="eyebrow">Pacote de minis</p>
-          <h2 className="mt-4 text-4xl font-black leading-[.95] tracking-[-.06em] sm:text-5xl">
+          <h2 className="mt-3 text-[1.7rem] font-black leading-[.98] tracking-[-.05em] min-[400px]:text-3xl sm:text-5xl md:mt-4 md:leading-[.95] md:tracking-[-.06em]">
             PEQUENAS NO TAMANHO.
             <br />
             <span className="text-[#ff1680]">GRANDES NA IDEIA.</span>
           </h2>
-          <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/60 sm:text-base">
+          <p className="mt-3 max-w-lg text-sm leading-relaxed text-white/60 md:mt-5 md:text-base">
             Minis de 3 a 5 cm, minimalistas e com quase nada de sombra. Todas na mesma pessoa e no
             mesmo dia. Quanto mais minis, menor o valor de cada uma.
           </p>
-          <p className="mt-4 text-sm text-white/60">
+          <p className="mt-3 text-sm text-white/60 md:mt-4">
             Mini colorida: <span className="font-bold text-white">+ R$ 50</span>. Demais trabalhos:
             orçamento personalizado com a equipe.
           </p>
@@ -119,14 +119,14 @@ export function MiniPackage() {
             href={whatsappUrl}
             target="_blank"
             rel="noreferrer"
-            className="mt-7 inline-flex rounded-full bg-[#ff1680] px-6 py-3 text-sm font-bold text-black transition hover:bg-white"
+            className="mt-5 inline-flex w-full justify-center rounded-full bg-[#ff1680] px-6 py-3 text-sm font-bold text-black transition hover:bg-white sm:w-auto md:mt-7"
           >
             Consultar disponibilidade →
           </a>
         </div>
 
-        <div className="border border-[#ff1680]/35 bg-[#090909] p-5 sm:p-8">
-          <div className="mb-4 grid grid-cols-2 border-b border-white/10 pb-3 text-xs font-bold uppercase tracking-[.2em] text-white/45">
+        <div className="border border-[#ff1680]/35 bg-[#090909] p-4 sm:p-8">
+          <div className="mb-2 grid grid-cols-2 border-b border-white/10 pb-2 text-xs font-bold uppercase tracking-[.2em] text-white/45 md:mb-4 md:pb-3">
             <span>Quantidade</span>
             <span className="text-right">Valor</span>
           </div>
@@ -134,10 +134,10 @@ export function MiniPackage() {
             {miniPrices.map((item) => (
               <div
                 key={item.quantity}
-                className="grid grid-cols-2 border-b border-white/10 py-4 last:border-0"
+                className="grid grid-cols-2 border-b border-white/10 py-2.5 last:border-0 md:py-4"
               >
                 <dt className="text-white/75">{item.quantity}</dt>
-                <dd className="text-right text-lg font-black text-[#ff8abf]">{item.price}</dd>
+                <dd className="text-right text-base font-black text-[#ff8abf] md:text-lg">{item.price}</dd>
               </div>
             ))}
           </dl>

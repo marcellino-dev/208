@@ -40,10 +40,12 @@ export function TattooMachine() {
     }
 
     gsap.registerPlugin(ScrollTrigger)
+    ScrollTrigger.config({ ignoreMobileResize: true })
     gsap.set(machine, { xPercent: -50, yPercent: -50 })
 
     let resizeHandler: (() => void) | undefined
     let resizeTimeout: number | undefined
+    let lastWidth = window.innerWidth
     const context = gsap.context(() => {
       const position = (desktop: number, mobile: number) => () =>
         window.innerWidth * (window.innerWidth < 768 ? mobile : desktop)
@@ -83,14 +85,14 @@ export function TattooMachine() {
           y: verticalPosition(-0.08, 0.13),
           z: -40,
           rotation: 45,
-          scale: scale(1, 0.5),
+          scale: scale(1, 0.75),
         },
         {
           x: position(0.02, -0.06),
           y: verticalPosition(0.1, 0.2),
           z: 110,
           rotation: 22,
-          scale: scale(0.86, 0.42),
+          scale: scale(0.86, 0.65),
           duration: 0.62,
           ease: "none",
         },
@@ -101,7 +103,7 @@ export function TattooMachine() {
         y: verticalPosition(0.1, 0.25),
         z: 25,
         rotation: 120,
-        scale: scale(1.15, 0.48),
+        scale: scale(1.15, 0.75),
         duration: 0.38,
         ease: "none",
       })
@@ -122,6 +124,11 @@ export function TattooMachine() {
       )
 
       resizeHandler = () => {
+        // Ignora mudanças só de altura (barra do navegador no celular)
+        if (window.innerWidth === lastWidth) {
+          return
+        }
+        lastWidth = window.innerWidth
         if (resizeTimeout !== undefined) {
           window.clearTimeout(resizeTimeout)
         }
@@ -172,6 +179,7 @@ export function TattooMachine() {
       viewer.style.width = "100%"
       viewer.style.height = "100%"
       viewer.style.backgroundColor = "transparent"
+      viewer.style.pointerEvents = "none"
       viewer.addEventListener(
         "load",
         () => {
@@ -212,12 +220,12 @@ export function TattooMachine() {
   return (
     <div
       ref={layerRef}
-      className="pointer-events-none fixed inset-x-0 top-0 z-[40] h-screen"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[100dvh]"
       style={{ perspective: "1200px" }}
     >
       <div
         ref={machineRef}
-        className="absolute left-1/2 top-1/2 h-[min(48vh,420px)] w-[min(64vw,300px)] will-change-transform opacity-[0.55] md:h-[min(70vh,680px)] md:w-[min(48vw,560px)] md:opacity-100"
+        className="absolute left-1/2 top-1/2 h-[min(52vh,460px)] w-[min(78vw,340px)] will-change-transform md:h-[min(70vh,680px)] md:w-[min(48vw,560px)]"
         style={{ transformStyle: "preserve-3d" }}
         aria-busy={status === "loading"}
       >

@@ -56,7 +56,7 @@
 
 @layer base {
   * { @apply border-border; }
-  html { scroll-behavior: smooth; }
+  html { scroll-padding-top: 4.5rem; }
   body {
     @apply bg-background text-foreground;
     background-color: #000000;
@@ -65,6 +65,13 @@
 }
 
 .eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: #ff1680; }
+
+/* Lenis: o scroll-behavior do CSS briga com o scroll suave do Lenis */
+html.lenis,
+html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
 
 @media (min-width: 1024px) and (min-height: 820px) {
   .depth-stage {
