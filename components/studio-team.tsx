@@ -54,7 +54,7 @@ export function StudioTeam() {
   return (
     <section
       id="equipe"
-      className="relative isolate overflow-hidden bg-black px-5 py-20 text-white md:px-8 md:py-24"
+      className="relative isolate overflow-hidden bg-black px-5 py-16 text-white md:px-8 md:py-24"
     >
       <div
         className="pointer-events-none absolute -left-56 -top-48 -z-10 size-[34rem] rounded-full border border-[#ff1680]/15"
@@ -109,7 +109,7 @@ export function StudioTeam() {
               type="button"
               onClick={() => move(-1)}
               aria-label="Ver profissional anterior"
-              className="pointer-events-auto grid size-10 place-items-center rounded-full border border-white/35 bg-black/75 text-white transition hover:border-[#ff1680] hover:text-[#ff1680] sm:size-11"
+              className="pointer-events-auto grid size-11 place-items-center rounded-full border border-white/35 bg-black/75 text-white transition hover:border-[#ff1680] hover:text-[#ff1680]"
             >
               <ChevronLeft size={22} aria-hidden="true" />
             </button>
@@ -117,7 +117,7 @@ export function StudioTeam() {
               type="button"
               onClick={() => move(1)}
               aria-label="Ver próximo profissional"
-              className="pointer-events-auto grid size-10 place-items-center rounded-full border border-white/35 bg-black/75 text-white transition hover:border-[#ff1680] hover:text-[#ff1680] sm:size-11"
+              className="pointer-events-auto grid size-11 place-items-center rounded-full border border-white/35 bg-black/75 text-white transition hover:border-[#ff1680] hover:text-[#ff1680]"
             >
               <ChevronRight size={22} aria-hidden="true" />
             </button>
@@ -157,7 +157,7 @@ export function StudioTeam() {
                     fill
                     sizes="(max-width: 639px) 85vw, (max-width: 1279px) 30vw, 20vw"
                     className={`transition-opacity duration-500 ${
-                      artist.hasCardText ? "object-contain" : "object-cover"
+                      artist.hasCardText ? "object-cover xl:object-top" : "object-cover"
                     } ${
                       isActive ? "opacity-100" : "opacity-80 grayscale"
                     }`}

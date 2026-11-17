@@ -16,7 +16,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
         duration: 1.2,
         smoothWheel: true,
         wheelMultiplier: 1,
-        touchMultiplier: 2,
+        touchMultiplier: 1,
         infinite: false,
       }}
     >

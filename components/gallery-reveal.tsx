@@ -73,7 +73,7 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
         scrollTrigger: {
           trigger: stage,
           start: "bottom bottom",
-          end: () => `+=${window.innerHeight * 1.3}`,
+          end: () => `+=${window.innerHeight * (window.innerWidth < 768 ? 0.9 : 1.3)}`,
           pin: true,
           scrub: true,
           anticipatePin: 1,
@@ -138,12 +138,25 @@ export function GalleryReveal({ gallery, next }: GalleryRevealProps) {
 
     links.forEach((link) => link.addEventListener("click", goToMinis))
 
+    let resizeTimeout: number | undefined
     const refresh = () => ScrollTrigger.refresh()
+    const refreshAfterResize = () => {
+      if (resizeTimeout !== undefined) {
+        window.clearTimeout(resizeTimeout)
+      }
+      resizeTimeout = window.setTimeout(refresh, 150)
+    }
+
     window.addEventListener("load", refresh)
+    window.addEventListener("resize", refreshAfterResize)
 
     return () => {
       links.forEach((link) => link.removeEventListener("click", goToMinis))
       window.removeEventListener("load", refresh)
+      window.removeEventListener("resize", refreshAfterResize)
+      if (resizeTimeout !== undefined) {
+        window.clearTimeout(resizeTimeout)
+      }
       context.revert()
     }
   }, [])

@@ -133,8 +133,8 @@ export function DepthStack({ children }: DepthStackProps) {
             ease: "none",
             scrollTrigger: {
               trigger: panel,
-              start: "top 95%",
-              end: "top 40%",
+              start: "top 92%",
+              end: "top 62%",
               scrub: true,
             },
           },
@@ -142,11 +142,24 @@ export function DepthStack({ children }: DepthStackProps) {
       })
     })
 
+    let resizeTimeout: number | undefined
     const refresh = () => ScrollTrigger.refresh()
+    const refreshAfterResize = () => {
+      if (resizeTimeout !== undefined) {
+        window.clearTimeout(resizeTimeout)
+      }
+      resizeTimeout = window.setTimeout(refresh, 150)
+    }
+
     window.addEventListener("load", refresh)
+    window.addEventListener("resize", refreshAfterResize)
 
     return () => {
       window.removeEventListener("load", refresh)
+      window.removeEventListener("resize", refreshAfterResize)
+      if (resizeTimeout !== undefined) {
+        window.clearTimeout(resizeTimeout)
+      }
       mm.revert()
     }
   }, [])

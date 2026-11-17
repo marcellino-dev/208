@@ -44,7 +44,7 @@ const aftercare = [
 
 export function StudioAbout() {
   return (
-    <section id="sobre" className="bg-black px-5 py-20 text-white md:px-8 md:py-24">
+    <section id="sobre" className="bg-black px-5 py-16 text-white md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <p className="eyebrow">Sobre o 208</p>
         <div className="mt-4 grid gap-8 md:grid-cols-[1fr_.8fr] md:items-end">
@@ -98,7 +98,7 @@ export function StudioAbout() {
 
 export function MiniPackage() {
   return (
-    <section id="minis" className="bg-black px-5 py-20 text-white md:px-8 md:py-24">
+    <section id="minis" className="bg-black px-5 py-16 text-white md:px-8 md:py-24">
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <div>
           <p className="eyebrow">Pacote de minis</p>
@@ -149,7 +149,7 @@ export function MiniPackage() {
 
 export function BookingGuide() {
   return (
-    <section id="como-agendar" className="bg-black px-5 py-20 text-white md:px-8 md:py-24">
+    <section id="como-agendar" className="bg-black px-5 py-16 text-white md:px-8 md:py-24">
       <div className="mx-auto max-w-7xl">
         <p className="eyebrow">Como agendar</p>
         <div className="mt-4 flex flex-col justify-between gap-5 md:flex-row md:items-end">
@@ -198,7 +198,7 @@ export function BookingGuide() {
 
 export function TattooCare() {
   return (
-    <section id="cuidados" className="bg-[#080808] px-5 py-20 text-white md:px-8 md:py-24">
+    <section id="cuidados" className="bg-[#080808] px-5 py-16 text-white md:px-8 md:py-24">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[.8fr_1.2fr]">
         <div>
           <p className="eyebrow">Cuidados pós-tattoo</p>
@@ -236,7 +236,7 @@ export function StudioLocation() {
     "https://www.google.com/maps/search/?api=1&query=Servid%C3%A3o+Harry+Kormann%2C+81%2C+Bucarein%2C+Joinville%2FSC"
 
   return (
-    <section id="localizacao" className="bg-black px-5 py-20 text-white md:px-8 md:py-24">
+    <section id="localizacao" className="bg-black px-5 py-16 text-white md:px-8 md:py-24">
       <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1fr_.8fr]">
         <div>
           <p className="eyebrow">Onde estamos</p>

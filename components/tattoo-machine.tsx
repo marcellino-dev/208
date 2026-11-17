@@ -43,6 +43,7 @@ export function TattooMachine() {
     gsap.set(machine, { xPercent: -50, yPercent: -50 })
 
     let resizeHandler: (() => void) | undefined
+    let resizeTimeout: number | undefined
     const context = gsap.context(() => {
       const position = (desktop: number, mobile: number) => () =>
         window.innerWidth * (window.innerWidth < 768 ? mobile : desktop)
@@ -78,29 +79,29 @@ export function TattooMachine() {
       path.fromTo(
         machine,
         {
-          x: position(0.23, 0.22),
+          x: position(0.23, 0.18),
           y: verticalPosition(-0.08, 0.13),
           z: -40,
           rotation: 45,
-          scale: scale(1, 0.64),
+          scale: scale(1, 0.5),
         },
         {
-          x: position(0.02, -0.02),
+          x: position(0.02, -0.06),
           y: verticalPosition(0.1, 0.2),
           z: 110,
           rotation: 22,
-          scale: scale(0.86, 0.55),
+          scale: scale(0.86, 0.42),
           duration: 0.62,
           ease: "none",
         },
       )
 
       path.to(machine, {
-        x: position(0.17, 0.01),
+        x: position(0.17, 0.02),
         y: verticalPosition(0.1, 0.25),
         z: 25,
         rotation: 120,
-        scale: scale(1.15, 0.7),
+        scale: scale(1.15, 0.48),
         duration: 0.38,
         ease: "none",
       })
@@ -121,11 +122,16 @@ export function TattooMachine() {
       )
 
       resizeHandler = () => {
-        const scrollTrigger = path.scrollTrigger
-        if (layer.style.position === "absolute" && scrollTrigger) {
-          ScrollTrigger.refresh()
-          layer.style.top = `${scrollTrigger.end}px`
+        if (resizeTimeout !== undefined) {
+          window.clearTimeout(resizeTimeout)
         }
+        resizeTimeout = window.setTimeout(() => {
+          ScrollTrigger.refresh()
+          const scrollTrigger = path.scrollTrigger
+          if (layer.style.position === "absolute" && scrollTrigger) {
+            layer.style.top = `${scrollTrigger.end}px`
+          }
+        }, 150)
       }
 
       window.addEventListener("resize", resizeHandler)
@@ -136,6 +142,9 @@ export function TattooMachine() {
     return () => {
       if (resizeHandler) {
         window.removeEventListener("resize", resizeHandler)
+      }
+      if (resizeTimeout !== undefined) {
+        window.clearTimeout(resizeTimeout)
       }
       context.revert()
     }
@@ -208,11 +217,11 @@ export function TattooMachine() {
     >
       <div
         ref={machineRef}
-        className="absolute left-1/2 top-1/2 h-[min(56vh,500px)] w-[min(74vw,360px)] will-change-transform md:h-[min(70vh,680px)] md:w-[min(48vw,560px)]"
+        className="absolute left-1/2 top-1/2 h-[min(48vh,420px)] w-[min(64vw,300px)] will-change-transform opacity-[0.55] md:h-[min(70vh,680px)] md:w-[min(48vw,560px)] md:opacity-100"
         style={{ transformStyle: "preserve-3d" }}
         aria-busy={status === "loading"}
       >
-        <div className="absolute inset-[15%] rounded-full bg-[#ff1680]/25 blur-[90px]" aria-hidden="true" />
+        <div className="absolute inset-[15%] rounded-full bg-[#ff1680]/25 blur-[60px] md:blur-[90px]" aria-hidden="true" />
         <div ref={viewerContainerRef} className="absolute inset-0" />
         {status === "loading" && (
           <p className="absolute inset-0 flex items-center justify-center text-[10px] uppercase tracking-[.2em] text-white/60" role="status">

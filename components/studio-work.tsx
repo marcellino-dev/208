@@ -13,7 +13,7 @@ const tattoos = [
 
 export function TattooGallery() {
   return (
-    <section id="trabalhos" className="px-5 py-20 text-white md:px-8 md:py-28">
+    <section id="trabalhos" className="px-5 py-16 text-white md:px-8 md:py-28">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 flex flex-col justify-between gap-4 md:mb-14 md:flex-row md:items-end">
           <div><p className="eyebrow text-[#ff8abf]">Feitas aqui. Levadas pra vida.</p><h2 className="mt-3 text-4xl font-black leading-[.95] tracking-[-.06em] md:text-6xl">TINTA NA PELE.<br /><span className="text-[#ff1680]">ARTE NO MUNDO.</span></h2></div>
@@ -32,5 +32,5 @@ export function TattooGallery() {
 }
 
 export function StudioFooter() {
-  return <footer id="estudio" className="bg-[#ff1680] px-5 py-16 text-[#000000] md:px-8 md:py-20"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[.28em]">208 estúdio · Joinville</p><h2 className="mt-5 text-5xl font-black leading-[.88] tracking-[-.07em] md:text-7xl">TUA IDEIA<br />MERECE <span className="text-white">PELE.</span></h2></div><div className="max-w-sm"><p className="mb-5 text-sm leading-relaxed">Conta pra gente o que você tá imaginando. A gente ajuda a transformar em tattoo.</p><a href="https://wa.me/5547991035449" target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black px-6 py-3 text-sm font-extrabold transition hover:bg-black hover:text-white">Chama no WhatsApp →</a><p className="mt-8 text-xs text-black/65">© 208 Estúdio · Joinville, SC</p></div></div></footer>
+  return <footer id="estudio" className="bg-[#ff1680] px-5 py-16 text-[#000000] md:px-8 md:py-20"><div className="mx-auto flex max-w-7xl flex-col justify-between gap-10 md:flex-row md:items-end"><div><p className="text-xs font-bold uppercase tracking-[.28em]">208 estúdio · Joinville</p><h2 className="mt-5 text-[clamp(2.75rem,13vw,3rem)] font-black leading-[.88] tracking-[-.07em] md:text-7xl">TUA IDEIA<br />MERECE <span className="text-white">PELE.</span></h2></div><div className="max-w-sm"><p className="mb-5 text-sm leading-relaxed">Conta pra gente o que você tá imaginando. A gente ajuda a transformar em tattoo.</p><a href="https://wa.me/5547991035449" target="_blank" rel="noreferrer" className="inline-flex rounded-full border border-black px-6 py-3 text-sm font-extrabold transition hover:bg-black hover:text-white">Chama no WhatsApp →</a><p className="mt-8 text-xs text-black/65">© 208 Estúdio · Joinville, SC</p></div></div></footer>
 }
